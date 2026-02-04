@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio | Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  :root {
+    --bg: #0b0d12;
+    --card: #121621;
+    --accent: #7c7cff;
+    --text: #eaeaf0;
+    --muted: #9aa0b3;
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    font-family:'Inter',sans-serif;
+    background: radial-gradient(circle at top, #14182a, var(--bg));
+    color: var(--text);
+    line-height:1.6;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    position:fixed; top:0; width:100%;
+    padding:1.2rem 10%;
+    display:flex; justify-content:space-between; align-items:center;
+    background: rgba(11,13,18,.6); backdrop-filter: blur(12px); z-index:100;
+  }
+
+  .logo {
+    font-family: 'Pacifico', cursive; font-size:1.4rem;
+    color:#9b9bff; text-shadow:0 0 8px rgba(124,124,255,.6), 0 0 20px rgba(124,124,255,.4);
+    letter-spacing:1px;
+  }
+
+  .menu { list-style:none; display:flex; gap:2rem; }
+  .menu a { text-decoration:none; color:var(--muted); font-weight:500; }
+  .menu a:hover { color:var(--text); }
+
+  .nav-actions { display:flex; gap:.8rem; align-items:center; }
+  .btn {
+    display:inline-block; padding:.7rem 1.4rem; border-radius:var(--radius);
+    background:var(--accent); color:#fff; text-decoration:none; font-weight:600;
+    transition:.3s;
+  }
+  .btn:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(124,124,255,.3);}
+  .btn.small { font-size:.85rem; }
+  .btn.ghost { background:transparent; border:1px solid var(--accent); }
+
+  /* HERO */
+  .hero { min-height:100vh; padding:8rem 10% 5rem; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:4rem; }
+  .hero h1 { font-size:clamp(3rem,6vw,4.5rem); font-weight:800; }
+  .hero span { background:linear-gradient(90deg,var(--accent),#4dd0e1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero p { max-width:500px; color:var(--muted); margin:1.5rem 0; }
+  .hero-img img {
+    width:100%; border-radius:30px; transform: perspective(800px) rotateY(-10deg);
+    box-shadow:0 40px 80px rgba(0,0,0,.5);
+  }
+
+  section { padding:5rem 10%; }
+  h2 { font-size:2.2rem; margin-bottom:2rem; }
+  .projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
+  .card { background:linear-gradient(180deg,#151a2e,var(--card)); border-radius:var(--radius); padding:2rem; transition:transform .3s; }
+  .card:hover { transform:translateY(-6px); box-shadow:0 10px 25px rgba(124,124,255,.3);}
+  footer { padding:4rem 10%; display:grid; grid-template-columns:1fr 1fr; gap:2rem; background:transparent; }
+  .footer-links a { display:block; color:var(--muted); text-decoration:none; margin-bottom:.5rem; }
+  .footer-links a:hover { color:var(--text); }
+  .reveal { opacity:0; transform:translateY(20px); transition:.6s ease; }
+  .reveal.active { opacity:1; transform:translateY(0); }
+
+
+  .social-icons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c7cff, #4dd0e1);
+  color: #fff;
+  font-size: 1.2rem;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(124,124,255,.5);
+  transition: all .3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 0 25px rgba(124,124,255,.9);
+}
+
+/* =========================
+   RESPONSIVE – MOBILE & TABLET
+========================= */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-img {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-img img {
+    max-width: 320px;
+    transform: none;
+  }
+
+  .hero p {
+    margin: 1.5rem auto;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-links {
+    margin-top: 2rem;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 6%;
+  }
+
+  .menu {
+    display: none; /* sakrij menu */
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .hero {
+    padding: 7rem 6% 4rem;
+  }
+
+  section {
+    padding: 4rem 6%;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-img img {
+    max-width: 260px;
+  }
+
+  footer {
+    padding: 3rem 6%;
+  }
+}
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">&lt;AS&gt; Ajna Selman</div>
+  <ul class="menu">
+    <li><a href="#" id="navHome">Home</a></li>
+    <li><a href="#about" id="navAbout">About</a></li>
+    <li><a href="#projects" id="navProjects">Projects</a></li>
+    <li><a href="#contact" id="navContact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn small">Download CV</a>
+    <div id="langToggle" style="display:flex;gap:.5rem;cursor:pointer;">
+      <img src="https://flagcdn.com/gb.svg" alt="English" width="25" id="engFlag" style="border-radius:4px;box-shadow:0 0 10px #7c7cff;">
+      <img src="https://flagcdn.com/ba.svg" alt="Bosanski" width="25" id="bsFlag" style="border-radius:4px;box-shadow:0 0 10px #7c7cff;">
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-text">
+    <h1 id="heroTitle">Ajna <span>Selman</span></h1>
+    <p id="heroDesc">Welcome to my portfolio.</p>
+
+
+    <a href="#projects" class="btn" id="heroBtn">View my work</a>
+  </div>
+  <div class="hero-img">
+    <img id="profileImg" src="ajna(1)(1).png" alt="Ajna Selman" />
+  </div>
+</header>
+
+<section id="about">
+  <h2 class="reveal" id="aboutTitle">About me</h2>
+  <p class="reveal" id="aboutText" style="max-width:720px;color:var(--muted)">
+    I am a 4th year Software Engineering student focused on building modern, user-friendly and visually polished websites. I continuously improve my skills in frontend development and UI/UX design. I have worked on projects such as <strong>techpool.ba</strong>, <strong>elektrotermslo.si</strong> and <strong>finra.edu.ba</strong>, and I am always open to new freelance opportunities.
+  </p>
+  <br />
+  <a href="#projects" class="btn" id="aboutBtn">See my projects</a>
+</section>
+
+<section id="projects">
+  <h2 class="reveal" id="projectsTitle">Projects</h2>
+  <div class="projects">
+    <a href="https://techpool.ba" target="_blank" class="card reveal" style="text-decoration:none;color:inherit">
+      <h3>techpool.ba</h3>
+      <p>Modern business website focused on clean UI, performance and clarity.</p>
+      <small>View live site →</small>
+    </a>
+    <a href="https://elektrotermslo.si" target="_blank" class="card reveal" style="text-decoration:none;color:inherit">
+      <h3>elektrotermslo.si</h3>
+      <p>Frontend development and UI improvements for the Electroterm company website.</p>
+      <small>View live site →</small>
+    </a>
+    <a href="https://finra.edu.ba" target="_blank" class="card reveal" style="text-decoration:none;color:inherit">
+      <h3>finra.edu.ba</h3>
+      <p>Faculty website – contribution to development and content structure.</p>
+      <small>View live site →</small>
+    </a>
+<a href="https://www.instagram.com/bravion.co?igsh=YWZzbmh4aTkzc2Zi" target="_blank" class="card reveal" style="text-decoration:none;color:inherit">
+      <h3>Graphic Design</h3>
+      <p> Logo and brand idetity design,social media visuals,marketing materials.</p>
+      <small>View Instagram profile →</small>
+
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="reveal" id="skillsTitle">Skills</h2>
+  <div class="projects">
+    <div class="card reveal"><h3 id="skill1Title">Frontend & backend</h3><p id="skill1Text">HTML, CSS, JavaScript, React, Responsive Design, Node.js, MySQL, Express.js</p></div>
+    <div class="card reveal"><h3 id="skill2Title">UI / UX</h3><p id="skill2Text">Clean layouts, modern design, usability focused</p></div>
+    <div class="card reveal"><h3 id="skill3Title">Tools</h3><p id="skill3Text">Git, GitHub, Figma, VS Code</p></div>
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="reveal" id="servicesTitle">Services</h2>
+  <div class="projects">
+    <div class="card reveal"><h3 id="service1Title">Business Websites</h3><p id="service1Text">Modern, professional websites for companies and brands.</p></div>
+    <div class="card reveal"><h3 id="service2Title">Portfolio Websites</h3><p id="service2Text">Personal portfolios for freelancers and creatives.</p></div>
+    <div class="card reveal"><h3 id="service3Title">Website Redesign</h3><p id="service3Text">Refreshing existing websites with a modern look.</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="reveal" id="contactTitle">Contact</h2>
+  <p class="reveal" id="contactText" style="color:var(--muted)">Interested in working together? Let's talk.</p>
+  <a href="mailto:selmanajna@gmail.com" class="btn" id="contactBtn">Email me</a>
+</section>
+
+<footer>
+  <div>
+ 
+  <div class="footer-links">
+    <strong id="quickLinksTitle">Quick links</strong>
+    <a href="#" id="navHomeFooter">Home</a>
+    <a href="#about" id="navAboutFooter">About</a>
+    <a href="#projects" id="navProjectsFooter">Projects</a>
+    <a href="#contact" id="navContactFooter">Contact</a>
+    <br />
+ <div class="social-icons">
+  <a href="https://www.facebook.com/ajna.selman.5/" target="_blank" aria-label="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.instagram.com/ajnna18/" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="mailto:selmanajna@gmail.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+
+  </div>
+</footer>
+
+<section style="padding:1rem 10%;text-align:center;background:#06070b;color:var(--muted);font-size:.75rem">
+  © 2025. Ajna Selman. Sva prava zadržana.
+</section>
+
+<script>
+/* Reveal animations */
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('active'));
+}, { threshold:0.15 });
+reveals.forEach(r => observer.observe(r));
+
+/* Language toggle with flags */
+let lang = 'en';
+const content = {
+  en:{heroDesc:'Welcome to my portfolio — web developer focused on clean design and smooth user experiences.',
+      heroBtn:'View my work',
+      aboutTitle:'About me',aboutText:'I am a 4th year Software Engineering student specializing in modern, clean and high-performing websites. I have worked on business, academic and freelance projects including techpool.ba, elektrotermslo.si and finra.edu.ba.',
+      aboutBtn:'See my projects',
+      projectsTitle:'Projects',skillsTitle:'Skills',
+      skill1Title:'Frontend',skill1Text:'HTML, CSS, JavaScript, Responsive Design',
+      skill2Title:'UI / UX',skill2Text:'Clean layouts, modern design, usability focused',
+      skill3Title:'Tools',skill3Text:'Git, GitHub, Figma, VS Code',
+      servicesTitle:'Services',
+      service1Title:'Business Websites',service1Text:'Modern, professional websites for companies and brands.',
+      service2Title:'Portfolio Websites',service2Text:'Personal portfolios for freelancers and creatives.',
+      service3Title:'Website Redesign',service3Text:'Refreshing existing websites with a modern look.',
+      contactTitle:'Contact',contactText:'Interested in working together? Let’s build something great.',
+      contactBtn:'Email me',
+      navHome:'Home',navAbout:'About',navProjects:'Projects',navContact:'Contact',
+      navHomeFooter:'Home',navAboutFooter:'About',navProjectsFooter:'Projects',navContactFooter:'Contact'
+     },
+  bs:{heroDesc:'Dobrodošli na moj portofolio',
+      heroBtn:'Pogledaj radove',
+      aboutTitle:'O meni',aboutText:'Studentica sam 4. godine softverskog inženjerstva sa fokusom na izradu modernih, preglednih i performantnih web stranica. Radila sam na poslovnim, akademskim i freelance projektima uključujući techpool.ba, elektrotermslo.si i finra.edu.ba.',
+      aboutBtn:'Pogledaj projekte',
+      projectsTitle:'Projekti',skillsTitle:'Vještine',
+      skill1Title:'Frontend',skill1Text:'HTML, CSS, JavaScript, React, Responzivni dizajn, Node.js, MySQL, Express.js...',
+      skill2Title:'UI / UX',skill2Text:'Čisti layouti, moderan izgled, fokus na korisničko iskustvo.',
+      skill3Title:'Alati',skill3Text:'Git, GitHub, Figma, VS Code',
+      servicesTitle:'Usluge',
+      service1Title:'Poslovni web sajtovi',service1Text:'Moderne, profesionalne web stranice za kompanije i brendove.',
+      service2Title:'Portfolio web sajtovi',service2Text:'Osobni portfoliji za freelancere i kreativce.',
+      service3Title:'Redizajn web sajtova',service3Text:'Osvježavanje postojećih stranica modernim dizajnom.',
+      contactTitle:'Kontakt',contactText:'Zainteresovani ste za saradnju? Javite se.',
+      contactBtn:'Pošalji email',
+      navHome:'Početna',navAbout:'O meni',navProjects:'Projekti',navContact:'Kontakt',
+      navHomeFooter:'Početna',navAboutFooter:'O meni',navProjectsFooter:'Projekti',navContactFooter:'Kontakt'
+     }
+};
+
+document.getElementById('engFlag').onclick = ()=>setLang('en');
+document.getElementById('bsFlag').onclick = ()=>setLang('bs');
+function setLang(l){
+  lang=l;
+  const ids=['heroDesc','heroBtn','aboutTitle','aboutText','aboutBtn','projectsTitle','skillsTitle',
+             'skill1Title','skill1Text','skill2Title','skill2Text','skill3Title','skill3Text',
+             'servicesTitle','service1Title','service1Text','service2Title','service2Text','service3Title','service3Text',
+             'contactTitle','contactText','contactBtn',
+             'navHome','navAbout','navProjects','navContact',
+             'navHomeFooter','navAboutFooter','navProjectsFooter','navContactFooter'];
+  ids.forEach(id=>{const el=document.getElementById(id);if(el && content[lang][id]) el.innerText=content[lang][id];});
+}
+
+/* 3D tilt + floating hero image */
+const img=document.getElementById('profileImg');let float=0;
+if(img){document.addEventListener('mousemove',e=>{
+  const x=(window.innerWidth/2-e.pageX)/25;
+  const y=(window.innerHeight/2-e.pageY)/25;
+  img.style.transform=`perspective(900px) rotateY(${x}deg) rotateX(${y}deg) translateY(${Math.sin(float)*6}px)`;
+});setInterval(()=>float+=0.05,30);}
+</script>
+</body>
+</html>
+
+
